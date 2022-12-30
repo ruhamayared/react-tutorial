@@ -2,25 +2,29 @@ import "./App.css"
 import { useState } from "react"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [todoList, setTodoList] = useState([])
+  const [newTask, setNewTask] = useState("")
 
-  function increase() {
-    setCount(count + 1)
+  function handleChange(event) {
+    setNewTask(event.target.value)
   }
-  function decrease() {
-    setCount(count - 1)
-  }
-  function setToZero() {
-    setCount(0)
+
+  function addTask() {
+    const newTodoList = [...todoList, newTask] //New todo list will be old todo list with new task
+    setTodoList(newTodoList) //Set the todo list to be the new todo list
   }
 
   return (
     <div className="App">
-      <button onClick={increase}>Increase</button>
-      <button onClick={decrease}>Decrease</button>
-      <button onClick={setToZero}>Set to Zero</button>
-
-      <h1>{count}</h1>
+      <div className="addTask">
+        <input type="text" onChange={handleChange} />
+        <button onClick={addTask}>Add Task</button>
+      </div>
+      <div className="list">
+        {todoList.map((element, item) => {
+          return <h1>{element}</h1>
+        })}
+      </div>
     </div>
   )
 }
