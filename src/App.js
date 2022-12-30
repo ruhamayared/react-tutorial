@@ -19,6 +19,7 @@ function App() {
     const task = {
       id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
       taskName: newTask,
+      completed: false,
     }
     setTodoList([...todoList, task])
   }
@@ -26,6 +27,15 @@ function App() {
   function deleteTask(id) {
     const newTodoList = todoList.filter((element) => element.id !== id)
     setTodoList(newTodoList)
+  }
+
+  function completedTask(id) {
+    let completeTask = todoList.map((element) => {
+      return element.id === id
+        ? { ...element, completed: !element.completed }
+        : { ...element }
+    })
+    setTodoList(completeTask)
   }
 
   return (
@@ -40,7 +50,9 @@ function App() {
             <Task
               taskName={element.taskName}
               id={element.id}
+              completed={element.completed}
               deleteTask={deleteTask}
+              completedTask={completedTask}
             />
           )
         })}
