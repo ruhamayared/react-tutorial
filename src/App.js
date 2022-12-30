@@ -9,9 +9,22 @@ function App() {
     setNewTask(event.target.value)
   }
 
+  // function addTask() {
+  //   const newTodoList = [...todoList, newTask] //New todo list will be old todo list with new task
+  //   setTodoList(newTodoList) //Set the todo list to be the new todo list
+  // }
+
   function addTask() {
-    const newTodoList = [...todoList, newTask] //New todo list will be old todo list with new task
-    setTodoList(newTodoList) //Set the todo list to be the new todo list
+    const task = {
+      id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+      taskName: newTask,
+    }
+    setTodoList([...todoList, task])
+  }
+
+  function deleteTask(elementName) {
+    const newTodoList = todoList.filter((element) => element !== elementName)
+    setTodoList(newTodoList)
   }
 
   return (
@@ -22,7 +35,12 @@ function App() {
       </div>
       <div className="list">
         {todoList.map((element, item) => {
-          return <h1>{element}</h1>
+          return (
+            <div>
+              <h1>{element.taskName}</h1>
+              <button onClick={() => deleteTask(element)}>🗑️</button>
+            </div>
+          )
         })}
       </div>
     </div>
