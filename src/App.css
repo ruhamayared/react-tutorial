@@ -41,3 +41,15 @@
 .name {
   color: blue
 }
+
+.btn {
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+}
+
+.btn:hover {
+  background-color: #4CAF50;
+}
